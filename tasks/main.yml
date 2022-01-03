@@ -1,0 +1,39 @@
+---
+# tasks file for docker_role
+- name: Copy of docker install script
+  template: 
+    src: "install_docker.sh.j2"
+    dest: "/home/{{ ansible_user }}/install_docker.sh"
+
+- name: Run docker install script
+  command: sh install_docker.sh
+
+- name: Give privilege
+  user: 
+    name: "{{ ansible_user }}"
+    append: yes
+    groups: 
+      - docker
+
+- name: install python pip on Ubuntu
+  apt:
+    name: python3-pip
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: install EPEL package on Centos7
+  yum:
+    name: epel-release
+    state: present
+  when: ansible_distribution == "Centos"
+
+- name: install python pip on Centos
+  yum: 
+    name: python3-pip
+    state: present
+  when: ansible_distribution == "Centos"
+
+- name: install docker-py module
+  pip:
+    name: docker-py
+    state: present

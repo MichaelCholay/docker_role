@@ -1,0 +1,12 @@
+#!/bin/bash
+{% if ansible_distribution == "Ubuntu" %}
+   sudo apt-get update -y
+   sudo apt install docker.io -y
+{% elif ansible_distribution == "Centos" %}
+   sudo yum install -y yum-utils
+   sudo yum install docker-ce docker-ce-cli containerd.io
+   sudo systemctl start docker
+{% else %}
+   echo 'Distribution pas prise en charge'
+{% endif %}
+
