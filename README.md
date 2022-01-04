@@ -1,7 +1,7 @@
-Role Name
+docker_role
 =========
 
-docker_role : Installation of docker on ubuntu or centos distribution.
+Installation of docker on ubuntu or centos distribution.
 
 Requirements
 ------------
