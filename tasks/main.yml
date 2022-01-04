@@ -6,7 +6,8 @@
     dest: "/home/{{ ansible_user }}/install_docker.sh"
 
 - name: Run docker install script
-  command: sh install_docker.sh
+  command: "sh /home/ubuntu/get-docker.sh"
+  when: ansible_docker0 is undefined
 
 - name: Give privilege
   user: 
